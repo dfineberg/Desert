@@ -25,7 +25,7 @@ RenderSettings:
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SkyboxMaterial: {fileID: 2100000, guid: 7f53fd52e1cc84fe9ac93cf917d0e2a3, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c656975b2ac424e3d9a4e78c4c965510, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTerrain: {fileID: 434922696}
   player: {fileID: 1271983762}
-  maxDepth: 0.0005
+  maxDepth: 0.001
   depthOfStep: 0.0003
   step: 0.9
   SmoothArea: 0
@@ -287,6 +287,14 @@ Prefab:
     - target: {fileID: 400024, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900002, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
+      propertyPath: m_SortingFudge
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900004, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
+      propertyPath: m_SortingFudge
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
@@ -492,7 +500,7 @@ MonoBehaviour:
   sensitivityNormals: 1
   lumThreshold: 0.2
   edgeExp: 1
-  sampleDist: 1
+  sampleDist: 0.8
   edgesOnly: 0
   edgesOnlyBgColor: {r: 1, g: 1, b: 1, a: 1}
   edgeDetectShader: {fileID: 4800000, guid: 0d1644bdf064147baa97f235fc5b4903, type: 3}

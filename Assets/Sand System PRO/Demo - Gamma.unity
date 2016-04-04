@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.9215687, g: 0.75294125, b: 0.7137255, a: 1}
+  m_AmbientEquatorColor: {r: 0.92549026, g: 0.5882353, b: 0.5137255, a: 1}
+  m_AmbientGroundColor: {r: 0.9960785, g: 0.8117648, b: 0.48627454, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 1
   m_SkyboxMaterial: {fileID: 2100000, guid: c656975b2ac424e3d9a4e78c4c965510, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -288,13 +288,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 19900002, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
-      propertyPath: m_SortingFudge
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19900004, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
-      propertyPath: m_SortingFudge
-      value: 2
+    - target: {fileID: 19800002, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
+      propertyPath: InitialModule.startColor.maxColor.rgba
+      value: 4287472383
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}

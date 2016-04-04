@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Sand L
+  m_Shader: {fileID: 4800000, guid: 557aa5010b7a59249b15b5824a14ec07, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_CustomRenderQueue: 2000
+  stringTagMap: {}
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _Tex0
+        second:
+          m_Texture: {fileID: 2800000, guid: dc6b9643274cffa4d8f8334822162510, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _BRDFTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 4dfd259aee44aaa4b86b6da3ed7f8912, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Tex1
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DispMap
+        second:
+          m_Texture: {fileID: 2800000, guid: c338476dfb29bd84ebc9d6ca2156743e, type: 3}
+          m_Scale: {x: 1000, y: 1000}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _Variable0
+        second: 100
+      data:
+        first:
+          name: _SpecPower
+        second: 1.9
+      data:
+        first:
+          name: _Brightnes
+        second: 0.79
+      data:
+        first:
+          name: _LightBrightnes
+        second: 2.5
+      data:
+        first:
+          name: _Variable1
+        second: 0.232
+      data:
+        first:
+          name: _DiffusePower
+        second: 10
+      data:
+        first:
+          name: _TessMultiplier
+        second: 1
+      data:
+        first:
+          name: _Displacement
+        second: 0
+      data:
+        first:
+          name: _WavesSpeed
+        second: 2000
+    m_Colors:
+      data:
+        first:
+          name: _Color0
+        second: {r: 0.89705884, g: 0.77223486, b: 0.25064883, a: 1}
+      data:
+        first:
+          name: _Color1
+        second: {r: 0.19117647, g: 0.19117647, b: 0.19117647, a: 1}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: 0.04411763, g: 0.04411763, b: 0.04411763, a: 1}

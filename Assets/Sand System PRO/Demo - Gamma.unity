@@ -338,6 +338,22 @@ Prefab:
       propertyPath: Tracked
       value: 
       objectReference: {fileID: 1271983770}
+    - target: {fileID: 423114, guid: 340bfb6bb4f3f4c21bcb2e4fc2ef7e12, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0.087154925
+      objectReference: {fileID: 0}
+    - target: {fileID: 423114, guid: 340bfb6bb4f3f4c21bcb2e4fc2ef7e12, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.9961948
+      objectReference: {fileID: 0}
+    - target: {fileID: 423114, guid: 340bfb6bb4f3f4c21bcb2e4fc2ef7e12, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 423114, guid: 340bfb6bb4f3f4c21bcb2e4fc2ef7e12, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 340bfb6bb4f3f4c21bcb2e4fc2ef7e12, type: 2}
   m_IsPrefabParent: 0

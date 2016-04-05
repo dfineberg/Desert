@@ -318,9 +318,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 502484195}
-  m_LocalRotation: {x: 0.3108999, y: -0.42393917, z: -0.24086392, w: 0.815844}
-  m_LocalPosition: {x: 1372, y: 3.1, z: 1649}
-  m_LocalScale: {x: 102.75674, y: 92.941475, z: 102.75673}
+  m_LocalRotation: {x: 0.37029675, y: -0.40770024, z: -0.33424312, w: 0.76481533}
+  m_LocalPosition: {x: 7227, y: 3.1, z: 7540}
+  m_LocalScale: {x: 1083.5458, y: 980.04584, z: 1083.5454}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -495,6 +495,10 @@ Prefab:
       propertyPath: InitialModule.startLifetime.minCurve.m_Curve.Array.data[0].value
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 100024, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29bd6535f5761a748b505821c47d9f20, type: 2}
   m_IsPrefabParent: 0
@@ -568,6 +572,10 @@ Prefab:
     - target: {fileID: 2026632, guid: 340bfb6bb4f3f4c21bcb2e4fc2ef7e12, type: 2}
       propertyPath: m_HDR
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 133210, guid: 340bfb6bb4f3f4c21bcb2e4fc2ef7e12, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 340bfb6bb4f3f4c21bcb2e4fc2ef7e12, type: 2}

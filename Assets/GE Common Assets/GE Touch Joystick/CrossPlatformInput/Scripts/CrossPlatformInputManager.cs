@@ -1,57 +1,91 @@
 using System;
 using UnityEngine;
-using UnitySampleAssets.CrossPlatformInput.PlatformSpecific;
+using UnityStandardAssets.CrossPlatformInput.PlatformSpecific;
 
-
-namespace UnitySampleAssets.CrossPlatformInput
+namespace UnityStandardAssets.CrossPlatformInput
 {
 	public static class CrossPlatformInputManager
 	{
-		private static VirtualInput virtualInput;
+		public enum ActiveInputMethod
+		{
+			Hardware,
+			Touch
+		}
+
+
+		private static VirtualInput activeInput;
+
+		private static VirtualInput s_TouchInput;
+		private static VirtualInput s_HardwareInput;
 
 
 		static CrossPlatformInputManager()
 		{
+			s_TouchInput = new MobileInput();
+			s_HardwareInput = new StandaloneInput();
 #if MOBILE_INPUT
-			virtualInput = new MobileInput ();
+            activeInput = s_TouchInput;
 #else
-			virtualInput = new StandaloneInput();
+			activeInput = s_HardwareInput;
 #endif
 		}
 
+		public static void SwitchActiveInputMethod(ActiveInputMethod activeInputMethod)
+		{
+			switch (activeInputMethod)
+			{
+				case ActiveInputMethod.Hardware:
+					activeInput = s_HardwareInput;
+					break;
+
+				case ActiveInputMethod.Touch:
+					activeInput = s_TouchInput;
+					break;
+			}
+		}
+
+		public static bool AxisExists(string name)
+		{
+			return activeInput.AxisExists(name);
+		}
+
+		public static bool ButtonExists(string name)
+		{
+			return activeInput.ButtonExists(name);
+		}
 
 		public static void RegisterVirtualAxis(VirtualAxis axis)
 		{
-			virtualInput.RegisterVirtualAxis(axis);
+			activeInput.RegisterVirtualAxis(axis);
 		}
 
 
 		public static void RegisterVirtualButton(VirtualButton button)
 		{
-			virtualInput.RegisterVirtualButton(button);
+			activeInput.RegisterVirtualButton(button);
 		}
 
 
-		public static void UnRegisterVirtualAxis(string _name)
+		public static void UnRegisterVirtualAxis(string name)
 		{
-			if (_name == null)
+			if (name == null)
 			{
-				throw new ArgumentNullException("_name");
+				throw new ArgumentNullException("name");
 			}
-			virtualInput.UnRegisterVirtualAxis(_name);
+			activeInput.UnRegisterVirtualAxis(name);
 		}
 
 
 		public static void UnRegisterVirtualButton(string name)
 		{
-			virtualInput.UnRegisterVirtualButton(name);
+			activeInput.UnRegisterVirtualButton(name);
 		}
 
 
 		// returns a reference to a named virtual axis if it exists otherwise null
 		public static VirtualAxis VirtualAxisReference(string name)
 		{
-			return virtualInput.VirtualAxisReference(name);
+			return activeInput.VirtualAxisReference(name);
 		}
 
 
@@ -71,86 +105,86 @@ namespace UnitySampleAssets.CrossPlatformInput
 		// private function handles both types of axis (raw and not raw)
 		private static float GetAxis(string name, bool raw)
 		{
-			return virtualInput.GetAxis(name, raw);
+			return activeInput.GetAxis(name, raw);
 		}
 
 
 		// -- Button handling --
 		public static bool GetButton(string name)
 		{
-			return virtualInput.GetButton(name);
+			return activeInput.GetButton(name);
 		}
 
 
 		public static bool GetButtonDown(string name)
 		{
-			return virtualInput.GetButtonDown(name);
+			return activeInput.GetButtonDown(name);
 		}
 
 
 		public static bool GetButtonUp(string name)
 		{
-			return virtualInput.GetButtonUp(name);
+			return activeInput.GetButtonUp(name);
 		}
 
 
 		public static void SetButtonDown(string name)
 		{
-			virtualInput.SetButtonDown(name);
+			activeInput.SetButtonDown(name);
 		}
 
 
 		public static void SetButtonUp(string name)
 		{
-			virtualInput.SetButtonUp(name);
+			activeInput.SetButtonUp(name);
 		}
 
 
 		public static void SetAxisPositive(string name)
 		{
-			virtualInput.SetAxisPositive(name);
+			activeInput.SetAxisPositive(name);
 		}
 
 
 		public static void SetAxisNegative(string name)
 		{
-			virtualInput.SetAxisNegative(name);
+			activeInput.SetAxisNegative(name);
 		}
 
 
 		public static void SetAxisZero(string name)
 		{
-			virtualInput.SetAxisZero(name);
+			activeInput.SetAxisZero(name);
 		}
 
 
 		public static void SetAxis(string name, float value)
 		{
-			virtualInput.SetAxis(name, value);
+			activeInput.SetAxis(name, value);
 		}
 
 
 		public static Vector3 mousePosition
 		{
-			get { return virtualInput.MousePosition(); }
+			get { return activeInput.MousePosition(); }
 		}
 
 
 		public static void SetVirtualMousePositionX(float f)
 		{
-			virtualInput.SetVirtualMousePositionX(f);
+			activeInput.SetVirtualMousePositionX(f);
 		}
 
 
 		public static void SetVirtualMousePositionY(float f)
 		{
-			virtualInput.SetVirtualMousePositionY(f);
+			activeInput.SetVirtualMousePositionY(f);
 		}
 
 
 		public static void SetVirtualMousePositionZ(float f)
 		{
-			virtualInput.SetVirtualMousePositionZ(f);
+			activeInput.SetVirtualMousePositionZ(f);
 		}
 
 
@@ -164,7 +198,8 @@ namespace UnitySampleAssets.CrossPlatformInput
 			public bool matchWithInputManager { get; private set; }
 
 
-			public VirtualAxis(string name) : this(name, true)
+			public VirtualAxis(string name)
+				: this(name, true)
 			{
 			}
 
@@ -173,7 +208,6 @@ namespace UnitySampleAssets.CrossPlatformInput
 			{
 				this.name = name;
 				matchWithInputManager = matchToInputSettings;
-				RegisterVirtualAxis(this);
 			}
 
 
@@ -209,13 +243,15 @@ namespace UnitySampleAssets.CrossPlatformInput
 		public class VirtualButton
 		{
 			public string name { get; private set; }
-			private int lastPressedFrame = -5;
-			private int releasedFrame = -5;
-			private bool pressed;
 			public bool matchWithInputManager { get; private set; }
 
+			private int m_LastPressedFrame = -5;
+			private int m_ReleasedFrame = -5;
+			private bool m_Pressed;
 
-			public VirtualButton(string name) : this(name, true)
+
+			public VirtualButton(string name)
+				: this(name, true)
 			{
 			}
 
@@ -224,27 +260,26 @@ namespace UnitySampleAssets.CrossPlatformInput
 			{
 				this.name = name;
 				matchWithInputManager = matchToInputSettings;
-	//  RegisterVirtualButton(this);
 			}
 
 
 			// A controller gameobject should call this function when the button is pressed down
 			public void Pressed()
 			{
-				if (pressed)
+				if (m_Pressed)
 				{
 					return;
 				}
-				pressed = true;
-				lastPressedFrame = Time.frameCount;
+				m_Pressed = true;
+				m_LastPressedFrame = Time.frameCount;
 			}
 
 
 			// A controller gameobject should call this function when the button is released
 			public void Released()
 			{
-				pressed = false;
-				releasedFrame = Time.frameCount;
+				m_Pressed = false;
+				m_ReleasedFrame = Time.frameCount;
 			}
 
 
@@ -258,7 +293,7 @@ namespace UnitySampleAssets.CrossPlatformInput
 			// these are the states of the button which can be read via the cross platform input system
 			public bool GetButton
 			{
-				get { return pressed; }
+				get { return m_Pressed; }
 			}
 
 
@@ -266,7 +301,7 @@ namespace UnitySampleAssets.CrossPlatformInput
 			{
 				get
 				{
-					return lastPressedFrame - Time.frameCount == 0;
+					return m_LastPressedFrame - Time.frameCount == -1;
 				}
 			}
 
@@ -275,7 +310,7 @@ namespace UnitySampleAssets.CrossPlatformInput
 			{
 				get
 				{
-					return (releasedFrame == Time.frameCount - 0);
+					return (m_ReleasedFrame == Time.frameCount - 1);
 				}
 			}
 		}

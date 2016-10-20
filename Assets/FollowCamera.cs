@@ -38,6 +38,7 @@ public class FollowCamera : MonoBehaviour {
 
 	Camera camera;
 	Vector3 targetPosition;
+    Vector3 currentTargetPosition;
 
 	float angleY = 0f;
 	float angleX = 0f;
@@ -65,6 +66,7 @@ public class FollowCamera : MonoBehaviour {
 
 		distance = targetDistance;
 		targetPosition = target.position - (target.forward * distance);
+        currentTargetPosition = target.position;
 		transform.position = targetPosition;
 
 		camera = GetComponent<Camera> ();
@@ -73,10 +75,11 @@ public class FollowCamera : MonoBehaviour {
 	void Update()
 	{
 		Vector3 walkDirection = new Vector3 (Input.GetAxis (playerAxisH), 0f, Input.GetAxis (playerAxisV));
-		walkDirection = Quaternion.Euler (angleX, angleY, 0f) * walkDirection;
+        if (walkDirection.magnitude < 0.3f) walkDirection = Vector3.zero;
+		walkDirection = Quaternion.Euler (0f, angleY, 0f) * walkDirection;
 
 		if(characterController){
-			characterController.Move (walkDirection, false, false);
+            characterController.Move (walkDirection, false, Input.GetButton("A_1"));
 		}
 	}
 
@@ -182,11 +185,15 @@ public class FollowCamera : MonoBehaviour {
 #endregion
 
 		distance = Mathf.Lerp (distance, newTargetDistance, zoomSpeed * Time.deltaTime);
+
+        currentTargetPosition = Vector3.Lerp(currentTargetPosition, target.position, followSpeed * Time.deltaTime);
+
 		Vector3 direction = Vector3.back * distance;
-		Vector3 targetPos = target.position + (Quaternion.Euler(angleX, angleY, 0f) * direction); // target position assuming no obstacles between camera and target
+        Vector3 targetPos = currentTargetPosition + (Quaternion.Euler(angleX, angleY, 0f) * direction); // target position assuming no obstacles between camera and target
 
 
 		transform.position = targetPos;
-		transform.LookAt (target.position);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentTargetPosition - transform.position), Time.deltaTime * yawSpeed);
 	}
 }
